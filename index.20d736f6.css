@@ -1,0 +1,2 @@
+.loader{width:48px;height:48px;box-sizing:border-box;border-radius:50%;margin:15px auto;animation:rotation 1s linear infinite;display:none;position:relative}.loader:after,.loader:before{content:"";box-sizing:border-box;width:16px;height:16px;background:#ff3d00;border-radius:50%;position:absolute;top:0;left:0;transform:translate(-50%,50%)}.loader:before{background:#666565;left:auto;right:0;transform:translate(50%,100%)}@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}body{background-color:#7fffd4}
+/*# sourceMappingURL=index.20d736f6.css.map */
