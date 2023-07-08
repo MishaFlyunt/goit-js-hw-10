@@ -59,12 +59,10 @@ function hideLoadingMessage() {
   refs.loading.style.display = 'none';
 }
 
-//Show error
 function showError() {
   Notify.failure('Oops! Something went wrong! Try reloading the page!');
 }
 
-// Remove all childs from .cat-info
 function clearCatContainer() {
   const children = Array.from(refs.catsContainer.children);
 
