@@ -1,14 +1,86 @@
-/* *,
+*,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
 img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-} */
-body{
-  background-color: aquamarine;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+	line-height: 1.5;
+	letter-spacing: 0.02em;
+  max-width: 100%;
+  height: 100vh;
+  background-image: url('../img/cat-1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  color: azure;
+  text-align: center;
+  font-size: 40px;
+  padding-top: 40px;
+}
+
+.breed-select {
+  height: 40px;
+  margin-top: 30px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 18px;
+  color: rgb(154, 94, 210);
+  border: 3px solid rgb(57, 206, 156);
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cat-info{
+  display: flex;
+
+  margin-top: 40px;
+  padding: 0 30px;
+}
+
+.imges-cat{
+  border-radius: 20px;
+}
+
+.text-content{
+padding: 0 50px 0 30px;
+margin: auto;
+}
+
+.cat-description{
+  color: rgb(255, 255, 255);
+  margin-bottom: 35px;
+}
+
+.cat-description b{
+  font-size: 25px;
+  color: rgb(178, 90, 90);
+  padding-right: 10px;
+}
+
+.cat-temperament{
+  color: rgb(255, 255, 255);
+}
+
+.cat-temperament b{
+  font-size: 20px;
+  color: rgb(178, 90, 90);
+  padding-right: 10px;
 }

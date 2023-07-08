@@ -24,4 +24,5 @@ function getAllIds(arr) {
     breedSelect.appendChild(optionsElement);
   }
 }
+
 export default createOptions;

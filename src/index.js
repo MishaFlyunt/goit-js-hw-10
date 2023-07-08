@@ -1,13 +1,11 @@
 import './css/load.css';
 import './css/style.css';
 
-import SlimSelect from 'slim-select';
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import API from './js/cat-api';
 import getRefs from './js/get-refs';
-import createOption from './js/create-options'
+import createOption from './js/create-options';
 
 const refs = getRefs();
 refs.select.addEventListener('change', onSelectView);
@@ -16,7 +14,7 @@ createOption();
 // Отримання об'єкта з вибраною породою та створення розмітки
 function onSelectView() {
   const breedId = selectedBreeds();
-  const isContent = document.querySelector('.img-cat');
+  const isContent = document.querySelector('.imges-cat');
 
   if (isContent) {
     clearCatContainer();
@@ -31,10 +29,8 @@ function onSelectView() {
     .finally(hideLoadingMessage);
 }
 
-// Getting Breed from Select
 function selectedBreeds() {
   const selectedValue = refs.select.options[refs.select.selectedIndex];
-  // const selectedText = selectedValue.textContent;
   const selectedId = selectedValue.value;
 
   return selectedId;
@@ -46,10 +42,10 @@ function renderCatsCard(arrCats) {
   let catTemp = arrCats.map(link => link.breeds[0].temperament);
 
   const markUp = `
-    <img class="img-cat" src="${imgCatUrl}" width="440" height="400">
-    <div class="intro">
-      <p class="cat-info"><b>Description: </b>${catDesc}</p>
-      <p class="cat-info"><b>Temperament: </b>${catTemp}</p>
+    <img class="imges-cat" src="${imgCatUrl}" width="440" height="400">
+    <div class="text-content">
+      <p class="cat-description"><b>Description: </b>${catDesc}</p>
+      <p class="cat-temperament"><b>Temperament: </b>${catTemp}</p>
     </div>
   `;
 
@@ -57,10 +53,8 @@ function renderCatsCard(arrCats) {
 }
 
 function showLoadingMessage() {
-  // refs.loading.style.display = 'block';
+  refs.loading.style.display = 'block';
 }
-
-// Hide loading message
 function hideLoadingMessage() {
   refs.loading.style.display = 'none';
 }
@@ -74,17 +68,9 @@ function showError() {
 function clearCatContainer() {
   const children = Array.from(refs.catsContainer.children);
 
-  // Check every child element
   children.forEach(child => {
-    // if not a close btn
     if (child !== refs.select) {
       refs.catsContainer.removeChild(child);
     }
   });
 }
-
-// new SlimSelect({
-//   select: '#selectElement',
-// });
-
-
