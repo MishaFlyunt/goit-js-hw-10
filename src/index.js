@@ -72,3 +72,5 @@ function clearCatContainer() {
     }
   });
 }
+
+export default { showError };

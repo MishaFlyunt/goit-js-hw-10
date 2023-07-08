@@ -1,4 +1,5 @@
 import API from './cat-api';
+import index from '../index';
 
 // отримання API та додавання <options> у select
 function createOptions() {
@@ -6,7 +7,7 @@ function createOptions() {
     .then(getAllIds)
     .catch(error => {
       if (error) {
-        showError();
+        index.showError();
       }
     });
 }
