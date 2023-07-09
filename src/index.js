@@ -37,15 +37,19 @@ function selectedBreeds() {
 }
 
 function renderCatsCard(arrCats) {
-  let imgCatUrl = arrCats.map(link => link.url);
-  let catDesc = arrCats.map(link => link.breeds[0].description);
-  let catTemp = arrCats.map(link => link.breeds[0].temperament);
+  const catInfo = {
+    imgCatUrl: arrCats.map(link => link.url),
+    catName: arrCats.map(link => link.breeds[0].name),
+    catDesc: arrCats.map(link => link.breeds[0].description),
+    catTemp: arrCats.map(link => link.breeds[0].temperament),
+  };
 
   const markUp = `
-    <img class="imges-cat" src="${imgCatUrl}" width="440" height="400">
+    <img class="imges-cat" src="${catInfo.imgCatUrl}" width="440" height="400">
     <div class="text-content">
-      <p class="cat-description"><b>Description: </b>${catDesc}</p>
-      <p class="cat-temperament"><b>Temperament: </b>${catTemp}</p>
+      <p class="cat-name">${catInfo.catName}</p>
+      <p class="cat-description"><b>Description: </b>${catInfo.catDesc}</p>
+      <p class="cat-temperament"><b>Temperament: </b>${catInfo.catTemp}</p>
     </div>
   `;
 
