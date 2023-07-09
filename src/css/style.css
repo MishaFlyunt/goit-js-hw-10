@@ -11,18 +11,19 @@ img {
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 400;
-	line-height: 1.5;
-	letter-spacing: 0.02em;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
   max-width: 100%;
   height: 100vh;
   background-image: url('../img/cat-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
-.section{
+.section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,39 +49,42 @@ body {
   margin-right: auto;
 }
 
-.cat-info{
+.cat-info {
   display: flex;
 
   margin-top: 40px;
   padding: 0 30px;
 }
 
-.imges-cat{
+.imges-cat {
   border-radius: 20px;
+  width: auto;
+  height: 300px;
 }
 
-.text-content{
-padding: 0 50px 0 30px;
-margin: auto;
+.text-content {
+  padding: 0 50px 0 30px;
+  margin: auto;
 }
 
-.cat-description{
+.cat-description {
   color: rgb(255, 255, 255);
   margin-bottom: 35px;
 }
 
-.cat-description b{
+.cat-description b {
   font-size: 20px;
   color: rgb(178, 90, 90);
   padding-right: 10px;
 }
 
-.cat-temperament{
+.cat-temperament {
   color: rgb(255, 255, 255);
 }
 
-.cat-temperament b{
+.cat-temperament b {
   font-size: 20px;
   color: rgb(178, 90, 90);
   padding-right: 10px;
 }
+
