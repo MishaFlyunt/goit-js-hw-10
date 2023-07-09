@@ -12,10 +12,10 @@ function createOptions() {
       if (error) {
         showError();
       }
-    })
+    });
 }
 
-function getAllIds(arr) {
+function getAllIds() {
   for (let i = 0; i < arr.length; i += 1) {
     let value = arr[i].id;
     let text = arr[i].name;
@@ -27,4 +27,4 @@ function getAllIds(arr) {
   }
 }
 
-export default createOptions;
+export default createOptions() ;

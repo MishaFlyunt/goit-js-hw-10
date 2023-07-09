@@ -2,49 +2,38 @@ import './css/load.css';
 import './css/style.css';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import axios from 'axios';
 
-import API from './js/cat-api';
 import getRefs from './js/get-refs';
-import createOption from './js/create-options';
-
 const refs = getRefs();
-refs.select.addEventListener('change', onSelectView);
 
-createOption();
-// Отримання об'єкта з вибраною породою та створення розмітки
-function onSelectView() {
-  const breedId = selectedBreeds();
-  const isContent = document.querySelector('.imges-cat');
+const API_KEY =
+  'live_xWxjHer6UZJgTibODO7LcNwB3HbveIjBzm2iA6eM3Euofuyy1FaMOakwuRKJSIWv';
 
-  if (isContent) {
-    clearCatContainer();
-  }
+axios.defaults.headers.common['x-api-key'] = API_KEY;
 
-  // Показати повідомлення про завантаження
-  showLoadingMessage();
-
-  API.fetchCatByBreed(breedId)
-    .then(renderCatsCard)
-    .catch(showError)
-    .finally(hideLoadingMessage);
+function populateBreeds(breeds) {
+  refs.selectElement.innerHTML = breeds
+    .map(breed => {
+      return `<option value="${breed.id}">${breed.name}</option>`;
+    })
+    .join('');
 }
 
-function selectedBreeds() {
-  const selectedValue = refs.select.options[refs.select.selectedIndex];
-  const selectedId = selectedValue.value;
-
-  return selectedId;
+function showLoader() {
+  refs.loaderElement.style.display = 'block';
 }
 
-function renderCatsCard(arrCats) {
-  const catInfo = {
-    imgCatUrl: arrCats.map(link => link.url),
-    catName: arrCats.map(link => link.breeds[0].name),
-    catDesc: arrCats.map(link => link.breeds[0].description),
-    catTemp: arrCats.map(link => link.breeds[0].temperament),
-  };
+function hideLoader() {
+  refs.loaderElement.style.display = 'none';
+}
 
-  const markUp = `
+function showError() {
+  Notify.failure('Oops! Something went wrong! Try reloading the page!');
+}
+
+function showCatInfo(catInfo) {
+  refs.catInfoElement.innerHTML = `
     <img class="imges-cat" src="${catInfo.imgCatUrl}" width="440" height="400">
     <div class="text-content">
       <p class="cat-name">${catInfo.catName}</p>
@@ -52,29 +41,65 @@ function renderCatsCard(arrCats) {
       <p class="cat-temperament"><b>Temperament: </b>${catInfo.catTemp}</p>
     </div>
   `;
-
-  refs.catsContainer.insertAdjacentHTML('beforeend', markUp);
+  // refs.catInfoElement.style.display = 'block';
+  refs.catInfoElement.classList.remove('is-hidden');
 }
 
-function showLoadingMessage() {
-  refs.loading.style.display = 'block';
-}
-function hideLoadingMessage() {
-  refs.loading.style.display = 'none';
+function hideCatInfo() {
+  // refs.catInfoElement.style.display = 'none';
+  refs.catInfoElement.classList.add('is-hidden');
 }
 
-function showError() {
-  Notify.failure('Oops! Something went wrong! Try reloading the page!');
+async function fetchBreeds() {
+  try {
+    const response = await axios.get('https://api.thecatapi.com/v1/breeds');
+    const breeds = response.data;
+    populateBreeds(breeds);
+    // refs.selectContainer.style.display = 'block';
+    refs.selectContainer.classList.remove('is-hidden');
+    refs.titleElement.classList.remove('is-hidden');
+  } catch (error) {
+    console.error(error);
+    showError();
+  } finally {
+    hideLoader();
+  }
 }
 
-function clearCatContainer() {
-  const children = Array.from(refs.catsContainer.children);
-
-  children.forEach(child => {
-    if (child !== refs.select) {
-      refs.catsContainer.removeChild(child);
-    }
-  });
+async function fetchCatByBreed(breedId) {
+  try {
+    const response = await axios.get(
+      `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`
+    );
+    const catInfo = {
+      imgCatUrl: response.data[0].url,
+      catName: response.data[0].breeds[0].name,
+      catDesc: response.data[0].breeds[0].description,
+      catTemp: response.data[0].breeds[0].temperament,
+    };
+    showCatInfo(catInfo);
+  } catch (error) {
+    console.error(error);
+    showError();
+  } finally {
+    hideLoader();
+  }
 }
 
-export default { showError };
+refs.selectElement.addEventListener('change', function () {
+  const selectedBreedId = this.value;
+  if (selectedBreedId) {
+    showLoader();
+    hideCatInfo();
+    fetchCatByBreed(selectedBreedId);
+  } else {
+    hideCatInfo();
+  }
+});
+
+// refs.selectContainer.style.display = 'none';
+refs.selectContainer.classList.add('is-hidden');
+refs.titleElement.classList.add('is-hidden');
+showLoader();
+
+fetchBreeds();
