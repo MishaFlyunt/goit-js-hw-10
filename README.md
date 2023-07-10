@@ -8,9 +8,11 @@ HTTP-запити
 
 Для використання ключа необхідно використовувати HTTP-заголовок x-api-key. Рекомендується використовувати axios та додати заголовок до всіх запитів.
 
-`import axios from "axios";
+```json
+import axios from "axios";
 
-axios.defaults.headers.common["x-api-key"] = "твій ключ";`
+axios.defaults.headers.common["x-api-key"] = "твій ключ";
+```
 
 Колекція порід
 
